@@ -1197,7 +1197,7 @@ public class Transaction extends ChildMessage {
 
             // Locktime
             uint32ToByteStreamLE(tx.lockTime, baos);
-            uint32ToByteStreamLE(sigHashType, baos);//(0x000000ff & sigHashType, baos);
+            uint32ToByteStreamLE(sigHashType, baos);
 
             Sha256Hash hash = Sha256Hash.twiceOf(baos.toByteArray());
             baos.close();
