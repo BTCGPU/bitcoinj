@@ -95,4 +95,20 @@ public class RegTestParams extends AbstractBitcoinNetParams {
     public String getPaymentProtocolId() {
         return PAYMENT_PROTOCOL_ID_REGTEST;
     }
+
+    @Override
+    public int getForkHeight() { return 2000; }
+
+    @Override
+    public int getEquihashForkHeight() { return 0; }
+
+    @Override
+    public EquihashDTO getEquihash() {
+        return new EquihashDTO(96,5, "BgoldPoW");
+    }
+
+    @Override
+    public EquihashDTO getEquihashBeforeFork() {
+        return new EquihashDTO(96,5, "BgoldPoW");
+    }
 }

@@ -1,7 +1,9 @@
 package org.bitcoinj.core;
 
 import com.rfksystems.blake2b.Blake2b;
+import org.bitcoinj.params.EquihashDTO;
 
+import javax.xml.bind.DatatypeConverter;
 import java.io.ByteArrayOutputStream;
 import java.util.*;
 
@@ -9,7 +11,7 @@ import java.util.*;
 public class Equihash {
 
     private final byte[] header;
-    private final byte[] nonce;
+    private byte[] nonce;
     private final byte[] solution;
     private final int n;
     private final int k;
@@ -27,41 +29,48 @@ public class Equihash {
         this.person = person;
     }
 
-    public boolean verify() throws Exception {
-        // TODO Spas fix
-        /*assert(Buffer.isBuffer(header), 'Header must be Buffer')
-        assert(header.length >= 108, 'Header must be at least 108 long')
-        assert(Buffer.isBuffer(solution), 'Solution must be Buffer')
+    public Equihash(byte[] header, byte[] solution, int n, int k, String person) {
+        this(header, new byte[0], solution, n, k, person);
+}
 
-        if (nonce) {
-            assert(Buffer.isBuffer(nonce), 'Nonce must be Buffer')
-        } else {
-            assert(header.length >= 140, 'Header must contain nonce')
-            var nonceHex = header.slice(140-32, 140).toString('hex').match(/.{2}/g).reverse().join("")
-            nonce = Buffer.from(nonceHex, 'hex')
-        }
-        */
-
-        //final byte[] out = new byte[digestLen];
-        //blake.digest(out, 0);
-
-        //String digestHex = DatatypeConverter.printHexBinary(out).toLowerCase();
-
-        return is_gbp_valid();
+    public Equihash(byte[] header, byte[] nonce, byte[] solution, EquihashDTO params) {
+        this(header, nonce, solution, params.getN(), params.getK(), params.getPerson());
     }
 
-    private boolean is_gbp_valid() throws Exception {
-        // TODO Spas FIX
-        //validate_params(n, k)
+    public Equihash(byte[] header, byte[] solution, EquihashDTO params) {
+        this(header, new byte[0], solution, params.getN(), params.getK(), params.getPerson());
+    }
+
+    public EquihashResult verify() {
+        try {
+            if(header.length < 108) {
+                return new EquihashResult(false, "Header must be at least 108 long");
+            }
+
+            if (nonce.length == 0) {
+                if(header.length < 140) {
+                    return new EquihashResult(false, "Header must contain nonce");
+                }
+
+                nonce = Utils.reverseBytes(Arrays.copyOfRange(header, 140-32, 140));
+            }
+
+            String nonce1 = DatatypeConverter.printHexBinary(nonce).toLowerCase();
+            return is_gbp_valid();
+        } catch(Exception ex) {
+            return new EquihashResult(false, ex.getMessage());
+        }
+    }
+
+    private EquihashResult is_gbp_valid() throws Exception {
+        validate_params(n, k);
         int collision_length = n / (k + 1);
         int hash_length = (k + 1) * ((collision_length + 7) / 8);
         int indices_per_hash_output = 512 / n;
         int solution_width = (1 << k) * (collision_length + 1) / 8;
 
         if (solution.length != solution_width) {
-            // TODO Spas fix
-            //console.log('Invalid solution length: ' + solution.length + ' (expected ' + solution_width + ')')
-            return false;
+            return new EquihashResult(false, "Invalid solution length: " + solution.length + " (expected " + solution_width + ")");
         }
 
         List<List<long[]>> X = new ArrayList<>();
@@ -91,19 +100,13 @@ public class Equihash {
             List<List<long[]>> Xc = new ArrayList<>();
             for (int i = 0; i < X.size(); i += 2) {
                 if (!has_collision(X.get(i).get(0), X.get(i + 1).get(0), r, collision_length)) {
-                    // TODO Spas FIX
-                    //console.log('Invalid solution: invalid collision length between StepRows')
-                    return false;
+                    return new EquihashResult(false, "Invalid solution: invalid collision length between StepRow");
                 }
                 if (X.get(i + 1).get(1)[0] < X.get(i).get(1)[0]) {
-                    // TODO Spas FIX
-                    //console.log('Invalid solution: Index tree incorrectly ordered')
-                    return false;
+                    return new EquihashResult(false, "Invalid solution: Index tree incorrectly ordered");
                 }
                 if (!distinct_indices(X.get(i).get(1), X.get(i + 1).get(1))) {
-                    // TODO Spas FIX
-                    //console.log('Invalid solution: duplicate indices')
-                    return false;
+                    return new EquihashResult(false, "Invalid solution: duplicate indices");
                 }
 
                 long[] xorArray = xor(X.get(i).get(0), X.get(i + 1).get(0));
@@ -119,18 +122,23 @@ public class Equihash {
         }
 
         if (X.size() != 1) {
-            // TODO Spas FIX
-            //console.log('Invalid solution: incorrect length after end of rounds: ' + X.length)
-            return false;
+            return new EquihashResult(false, "Invalid solution: incorrect length after end of rounds: " + X.size());
         }
 
         if (count_zeroes(X.get(0).get(0)) != 8 * hash_length) {
-            // TODO Spas FIX
-            //console.log('Invalid solution: incorrect number of zeroes: ' + count_zeroes(X[0][0]))
-            return false;
+            return new EquihashResult(false, "Invalid solution: incorrect number of zeroes: " + count_zeroes(X.get(0).get(0)));
         }
 
-        return true;
+        return new EquihashResult(true);
+    }
+
+    private  void validate_params(int n, int k) {
+        if (k >= n) {
+            throw new IllegalArgumentException("n must be larger than k");
+        }
+        if (((n / (k + 1)) + 1) >= 32) {
+            throw new IllegalArgumentException("Parameters must satisfy n/(k+1)+1 < 32");
+        }
     }
 
     private int count_zeroes(long[] h) {
@@ -164,8 +172,7 @@ public class Equihash {
 
     private long[] xor(long[] ha, long[] hb) {
         if (ha.length != hb.length) {
-            // TODO Spas FIX
-            // throw ex
+            throw new IllegalArgumentException("ha.length != hb.length");
         }
 
         List<Map.Entry<Long,Long>> zip = new ArrayList<>(ha.length);
@@ -173,7 +180,7 @@ public class Equihash {
             zip.add(new AbstractMap.SimpleEntry<>(ha[i], hb[i]));
         }
 
-        List<Long> res = new ArrayList<Long>();
+        List<Long> res = new ArrayList<>();
         for (Map.Entry<Long, Long> aZip : zip) {
             res.add(aZip.getKey() ^ aZip.getValue());
         }
@@ -181,9 +188,9 @@ public class Equihash {
         return toPrimitiveArray(res);
     }
 
-    private <T extends Collection> long[] toPrimitiveArray(T res) {
+    private <T extends Collection<Long>> long[] toPrimitiveArray(T res) {
         long[] result = new long[res.size()];
-        Long[] objectArray = (Long[]) res.toArray(new Long[0]);
+        Long[] objectArray = res.toArray(new Long[0]);
         for (int i = 0; i < res.size(); i++) {
             result[i] = objectArray[i];
         }
@@ -222,8 +229,10 @@ public class Equihash {
 
     private List<Long> get_indices_from_minimal(byte[] minimal, int bit_len) {
         int eh_index_size = 4;
-        // TODO Spas FIX
-        //assert(int)((bit_len + 7) / 8) <= eh_index_size);
+        if ((bit_len + 7) / 8 > eh_index_size) {
+            throw new IllegalArgumentException("(bit_len + 7) / 8 > eh_index_size");
+        }
+
         int len_indices = 8 * eh_index_size * minimal.length / bit_len;
         int byte_pad = eh_index_size - ((bit_len + 7) / 8);
         byte[] expanded = expand_array(minimal, len_indices, bit_len, byte_pad);
@@ -237,13 +246,17 @@ public class Equihash {
     }
 
     private byte[] expand_array(byte[] inp, int out_len, int bit_len, int byte_pad) {
-        // TODO Spas fix
-        // assert(bit_len >= 8 && word_size >= 7 + bit_len)
+        if (bit_len < 8 || word_size < 7 + bit_len)
+        {
+            throw new IllegalArgumentException("bit_len < 8 || word_size < 7 + bit_len");
+        }
 
         int out_width = ((bit_len + 7) / 8) + byte_pad;
+        if (out_len != (8 * out_width * inp.length / bit_len))
+        {
+            throw new IllegalArgumentException("out_len != (8 * out_width * inp.length / bit_len)");
+        }
 
-        // TODO Spas fix
-        //assert(out_len == Math.trunc(8 * out_width * inp.length / bit_len))
         byte[] out = new byte[out_len];
 
         int bit_len_mask = (1 << bit_len) - 1;
