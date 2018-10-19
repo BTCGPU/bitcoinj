@@ -141,6 +141,7 @@ public class BlockGoldTest {
 
         // Act
         Block block = MAINNET.getBitcoinGoldSerializer().makeBlock(bytes);
+        boolean isValidPow = block.checkProofOfWork(false, true);
 
         // Assert
         assertEquals(536870912, block.getVersion());
@@ -161,7 +162,7 @@ public class BlockGoldTest {
         String blockHex = DatatypeConverter.printHexBinary(bytesBlock).toLowerCase();
         assertEquals(hex, blockHex);
 
-        boolean isValidPow = block.checkProofOfWork(false);
+        assertTrue(isValidPow);
     }
 
     @Test(expected = ProtocolException.class)
