@@ -93,4 +93,20 @@ public class MainNetParams extends AbstractBitcoinNetParams {
     public String getPaymentProtocolId() {
         return PAYMENT_PROTOCOL_ID_MAINNET;
     }
+
+    @Override
+    public int getForkHeight() { return 491407; }
+
+    @Override
+    public int getEquihashForkHeight() { return 536200; }
+
+    @Override
+    public EquihashDTO getEquihash() {
+        return new EquihashDTO(144,5, "BgoldPoW");
+    }
+
+    @Override
+    public EquihashDTO getEquihashBeforeFork() {
+        return new EquihashDTO(200,9, "ZcashPoW");
+    }
 }

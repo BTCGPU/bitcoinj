@@ -20,6 +20,7 @@ package org.bitcoinj.core;
 import com.google.common.annotations.*;
 import com.google.common.base.*;
 import com.google.common.collect.*;
+import org.bitcoinj.params.EquihashDTO;
 import org.bitcoinj.script.*;
 import org.slf4j.*;
 
@@ -541,7 +542,7 @@ public class Block extends Message {
         while (true) {
             try {
                 // Is our proof of work valid yet?
-                if (checkProofOfWork(false))
+                if (checkProofOfWork(false, false))
                     return;
                 // No, so increment the nonce and try again.
                 setNonce(getNonce() + 1);
@@ -564,7 +565,7 @@ public class Block extends Message {
     }
 
     /** Returns true if the hash of the block is OK (lower than difficulty target). */
-    protected boolean checkProofOfWork(boolean throwException) throws VerificationException {
+    protected boolean checkProofOfWork(boolean throwException, boolean validateSolution) throws VerificationException {
         // This part is key - it is what proves the block was as difficult to make as it claims
         // to be. Note however that in the context of this function, the block can claim to be
         // as difficult as it wants to be .... if somebody was able to take control of our network
@@ -584,7 +585,21 @@ public class Block extends Message {
             else
                 return false;
         }
-        return true;
+
+        if (validateSolution && this.height >= params.getForkHeight()) {
+            EquihashDTO equihashParams = params.getEquihash();
+            if (this.height <= params.getEquihashForkHeight()) {
+                equihashParams = params.getEquihashBeforeFork();
+            }
+
+            Equihash equihash = new Equihash(bitcoinSerialize(), solution, equihashParams);
+            EquihashResult res = equihash.verify();
+            if (throwException)
+                throw new VerificationException("Solution validation failed: " + res.getMessage());
+            return res.isValid();
+        } else {
+            return true;
+        }
     }
 
     private void checkTimestamp() throws VerificationException {
@@ -709,7 +724,25 @@ public class Block extends Message {
         //
         // Firstly we need to ensure this block does in fact represent real work done. If the difficulty is high
         // enough, it's probably been done by the network.
-        checkProofOfWork(true);
+        checkProofOfWork(true, false);
+        checkTimestamp();
+    }
+
+    /**
+     * Checks the block data to ensure it follows the rules laid out in the network parameters. Specifically,
+     * throws an exception if the proof of work is invalid, or if the timestamp is too far from what it should be.
+     * This is <b>not</b> everything that is required for a block to be valid, only what is checkable independent
+     * of the chain and without a transaction index.
+     *
+     * @throws VerificationException
+     */
+    public void verifyHeader(boolean validateSolution) throws VerificationException {
+        // Prove that this block is OK. It might seem that we can just ignore most of these checks given that the
+        // network is also verifying the blocks, but we cannot as it'd open us to a variety of obscure attacks.
+        //
+        // Firstly we need to ensure this block does in fact represent real work done. If the difficulty is high
+        // enough, it's probably been done by the network.
+        checkProofOfWork(true, validateSolution);
         checkTimestamp();
     }
 

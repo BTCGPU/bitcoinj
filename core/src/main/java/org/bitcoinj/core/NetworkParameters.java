@@ -554,4 +554,9 @@ public abstract class NetworkParameters {
             return bitcoinProtocol;
         }
     }
+
+    public abstract int getForkHeight();
+    public abstract int getEquihashForkHeight();
+    public abstract EquihashDTO getEquihash();
+    public abstract EquihashDTO getEquihashBeforeFork();
 }

@@ -121,4 +121,20 @@ public class TestNet3Params extends AbstractBitcoinNetParams {
             super.checkDifficultyTransitions(storedPrev, nextBlock, blockStore);
         }
     }
+
+    @Override
+    public int getForkHeight() { return 1; }
+
+    @Override
+    public int getEquihashForkHeight() { return 14300; }
+
+    @Override
+    public EquihashDTO getEquihash() {
+        return new EquihashDTO(144,5, "BgoldPoW");
+    }
+
+    @Override
+    public EquihashDTO getEquihashBeforeFork() {
+        return new EquihashDTO(200,9, "ZcashPoW");
+    }
 }

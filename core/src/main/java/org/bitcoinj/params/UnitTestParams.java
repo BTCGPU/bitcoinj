@@ -67,4 +67,20 @@ public class UnitTestParams extends AbstractBitcoinNetParams {
     public String getPaymentProtocolId() {
         return "unittest";
     }
+
+    @Override
+    public int getForkHeight() { return 0; }
+
+    @Override
+    public int getEquihashForkHeight() { return 0; }
+
+    @Override
+    public EquihashDTO getEquihash() {
+        return new EquihashDTO(144,5, "BgoldPoW");
+    }
+
+    @Override
+    public EquihashDTO getEquihashBeforeFork() {
+        return new EquihashDTO(200,9, "ZcashPoW");
+    }
 }
