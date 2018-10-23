@@ -109,4 +109,11 @@ public class MainNetParams extends AbstractBitcoinNetParams {
     public EquihashDTO getEquihashBeforeFork() {
         return new EquihashDTO(200,9, "ZcashPoW");
     }
+
+    @Override
+    public LwmaConfig getLwmaConfig() {
+        return new LwmaConfig(536200, false, false, 600,
+                45, 13772, 10, true,
+                "14134776517815698497336078495404605830980533548759267698564454644503805952");
+    }
 }

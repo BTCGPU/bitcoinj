@@ -137,4 +137,11 @@ public class TestNet3Params extends AbstractBitcoinNetParams {
     public EquihashDTO getEquihashBeforeFork() {
         return new EquihashDTO(200,9, "ZcashPoW");
     }
+
+    @Override
+    public LwmaConfig getLwmaConfig() {
+        return new LwmaConfig(14300, true, false, 600,
+                45, 13772, 10, false,
+                "14134776518227074636666380005943348126619871175004951664972849610340958207");
+    }
 }

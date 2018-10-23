@@ -111,4 +111,11 @@ public class RegTestParams extends AbstractBitcoinNetParams {
     public EquihashDTO getEquihashBeforeFork() {
         return new EquihashDTO(96,5, "BgoldPoW");
     }
+
+    @Override
+    public LwmaConfig getLwmaConfig() {
+        return new LwmaConfig(0, false, true, 600,
+                45, 13772, 10, false,
+                "57896044618658097711785492504343953926634992332820282019728792003956564819967");
+    }
 }

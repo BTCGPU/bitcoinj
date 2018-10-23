@@ -141,7 +141,7 @@ public class BlockGoldTest {
 
         // Act
         Block block = MAINNET.getBitcoinGoldSerializer().makeBlock(bytes);
-        boolean isValidPow = block.checkProofOfWork(false, true);
+        boolean isValidPow = block.checkProofOfWork(false, true, null);
 
         // Assert
         assertEquals(536870912, block.getVersion());
