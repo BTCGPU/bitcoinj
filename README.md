@@ -49,6 +49,6 @@ Now you are ready to [follow the tutorial](https://bitcoinj.github.io/getting-st
 - [Create Bitcoin Gold Block from hex](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L19)
 - [Create a 1-to-1 Bitcoin Gold Transaction](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L553)
 - [Create a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L590)
-- [Sign a 2-of-2 Bitcoin Gold multisig] (https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L637)
+- [Sign a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L637)
 - [Validate block (including Equihash)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L144)
 - [Validate block (including LWMA)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/LwmaTest.java#L91)
