@@ -50,7 +50,7 @@ public class Lwma {
         long t = 0;
         long j = 0;
         long ts = 6 * lwmaConfig.getPowTargetSpacing();
-        BigInteger dividerBig = new BigInteger(String.valueOf(weight * lwmaConfig.getAveragingWindow() * lwmaConfig.getAveragingWindow()));
+        BigInteger dividerBig = BigInteger.valueOf(weight * lwmaConfig.getAveragingWindow() * lwmaConfig.getAveragingWindow());
 
         // Loop through N most recent blocks.  "< height", not "<="
         for (long i = height - lwmaConfig.getAveragingWindow(); i < height; i++) {
@@ -73,7 +73,7 @@ public class Lwma {
             t = lwmaConfig.getAveragingWindow() * weight / lwmaConfig.getMinDenominator();
         }
 
-        BigInteger newTargetBig = totalBig.multiply(new BigInteger(String.valueOf(t)));
+        BigInteger newTargetBig = totalBig.multiply(BigInteger.valueOf(t));
         if (newTargetBig.compareTo(limitBig) >= 0) {
             newTargetBig = limitBig;
         }
@@ -82,11 +82,11 @@ public class Lwma {
     }
 
     private BigInteger bitsToTarget(long bits) {
-        BigInteger bitsBig = new BigInteger(String.valueOf(bits));
+        BigInteger bitsBig = BigInteger.valueOf(bits);
         int size = bitsBig.shiftRight(24).intValue();
         long word = bits & 0x007fffff;
 
-        BigInteger wordBig = new BigInteger(String.valueOf(word));
+        BigInteger wordBig = BigInteger.valueOf(word);
         if (size <= 3) {
             return wordBig.shiftRight(8 * (3 - size));
         }
