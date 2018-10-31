@@ -2,7 +2,7 @@
 
 [![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/bitcoinj.png)](https://kiwiirc.com/client/irc.freenode.net/bitcoinj)
 
-### Welcome to bitcoinj
+### Welcome to bitcoingoldj - bitcoinj fork for Bitcoin Gold
 
 The bitcoinj library is a Java implementation of the Bitcoin protocol, which allows it to maintain a wallet and send/receive transactions without needing a local copy of Bitcoin Core. It comes with full documentation and some example apps showing how to use it.
 
@@ -41,3 +41,14 @@ These are found in the `examples` module.
 ### Where next?
 
 Now you are ready to [follow the tutorial](https://bitcoinj.github.io/getting-started).
+
+### BTG Changes
+
+## Examples
+
+- [Create Bitcoin Gold Block from hex](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L19)
+- [Create a 1-to-1 Bitcoin Gold Transaction](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L553)
+- [Create a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L590)
+- [Sign a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L637)
+- [Validate block (including Equihash)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L144)
+- [Validate block (including LWMA)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/LwmaTest.java#L91)

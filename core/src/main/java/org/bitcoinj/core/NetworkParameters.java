@@ -18,9 +18,6 @@
 package org.bitcoinj.core;
 
 import com.google.common.base.Objects;
-import org.bitcoinj.core.Block;
-import org.bitcoinj.core.StoredBlock;
-import org.bitcoinj.core.VerificationException;
 import org.bitcoinj.net.discovery.*;
 import org.bitcoinj.params.*;
 import org.bitcoinj.script.*;
@@ -559,4 +556,5 @@ public abstract class NetworkParameters {
     public abstract int getEquihashForkHeight();
     public abstract EquihashDTO getEquihash();
     public abstract EquihashDTO getEquihashBeforeFork();
+    public abstract LwmaConfig getLwmaConfig();
 }

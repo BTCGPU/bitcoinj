@@ -21,6 +21,7 @@ import com.google.common.annotations.*;
 import com.google.common.base.*;
 import com.google.common.collect.*;
 import org.bitcoinj.params.EquihashDTO;
+import org.bitcoinj.params.LwmaConfig;
 import org.bitcoinj.script.*;
 import org.slf4j.*;
 
@@ -542,7 +543,7 @@ public class Block extends Message {
         while (true) {
             try {
                 // Is our proof of work valid yet?
-                if (checkProofOfWork(false, false))
+                if (checkProofOfWork(false, false, null))
                     return;
                 // No, so increment the nonce and try again.
                 setNonce(getNonce() + 1);
@@ -565,26 +566,46 @@ public class Block extends Message {
     }
 
     /** Returns true if the hash of the block is OK (lower than difficulty target). */
-    protected boolean checkProofOfWork(boolean throwException, boolean validateSolution) throws VerificationException {
-        // This part is key - it is what proves the block was as difficult to make as it claims
-        // to be. Note however that in the context of this function, the block can claim to be
-        // as difficult as it wants to be .... if somebody was able to take control of our network
-        // connection and fork us onto a different chain, they could send us valid blocks with
-        // ridiculously easy difficulty and this function would accept them.
-        //
-        // To prevent this attack from being possible, elsewhere we check that the difficultyTarget
-        // field is of the right value. This requires us to have the preceding blocks.
-        BigInteger target = getDifficultyTargetAsInteger();
+    protected boolean checkProofOfWork(boolean throwException, boolean validateSolution, Block[] prevBlocks) throws VerificationException {
+       if(height >= params.getLwmaConfig().getEnableHeight()) {
+           if(prevBlocks != null) {
+               try {
+                   Lwma lwma = new Lwma();
+                   LwmaConfig lwmaConfig = params.getLwmaConfig();
+                   long bits = lwma.calcNextBits(this, prevBlocks, lwmaConfig);
+                   if (bits != difficultyTarget) {
+                       return false;
+                   }
 
-        BigInteger h = getHash().toBigInteger();
-        if (h.compareTo(target) > 0) {
-            // Proof of work check failed!
-            if (throwException)
-                throw new VerificationException("Hash is higher than target: " + getHashAsString() + " vs "
-                        + target.toString(16));
-            else
-                return false;
-        }
+               } catch (Exception ex) {
+                   if (throwException) {
+                       throw new VerificationException(ex.getMessage());
+                   }
+
+                   return false;
+               }
+           }
+        } else {
+            // This part is key - it is what proves the block was as difficult to make as it claims
+            // to be. Note however that in the context of this function, the block can claim to be
+            // as difficult as it wants to be .... if somebody was able to take control of our network
+            // connection and fork us onto a different chain, they could send us valid blocks with
+            // ridiculously easy difficulty and this function would accept them.
+            //
+            // To prevent this attack from being possible, elsewhere we check that the difficultyTarget
+        // field is of the right value. This requires us to have the preceding blocks.
+            BigInteger target = getDifficultyTargetAsInteger();
+
+            BigInteger h = getHash().toBigInteger();
+            if (h.compareTo(target) > 0) {
+                // Proof of work check failed!
+                if (throwException)
+                    throw new VerificationException("Hash is higher than target: " + getHashAsString() + " vs "
+                            + target.toString(16));
+                else
+                    return false;
+            }
+       }
 
         if (validateSolution && this.height >= params.getForkHeight()) {
             EquihashDTO equihashParams = params.getEquihash();
@@ -724,7 +745,7 @@ public class Block extends Message {
         //
         // Firstly we need to ensure this block does in fact represent real work done. If the difficulty is high
         // enough, it's probably been done by the network.
-        checkProofOfWork(true, false);
+        checkProofOfWork(true, false, null);
         checkTimestamp();
     }
 
@@ -736,13 +757,13 @@ public class Block extends Message {
      *
      * @throws VerificationException
      */
-    public void verifyHeader(boolean validateSolution) throws VerificationException {
+    public void verifyHeader(boolean validateSolution, Block[] prevBlocks) throws VerificationException {
         // Prove that this block is OK. It might seem that we can just ignore most of these checks given that the
         // network is also verifying the blocks, but we cannot as it'd open us to a variety of obscure attacks.
         //
         // Firstly we need to ensure this block does in fact represent real work done. If the difficulty is high
         // enough, it's probably been done by the network.
-        checkProofOfWork(true, validateSolution);
+        checkProofOfWork(true, validateSolution, prevBlocks);
         checkTimestamp();
     }
 
