@@ -11,7 +11,7 @@ sourceCompatibility = 1.8
 
 task wallet_tool(type: JavaExec) {
     description = 'Print and manipulate wallets.'
-    main = 'org.bitcoinj.tools.WalletTool'
+    main = 'org.bitcoingoldj.tools.WalletTool'
     if (project.hasProperty('appArgs') && appArgs.length() > 0)
         args = Arrays.asList(appArgs.split("\\s+"))
     classpath = sourceSets.main.runtimeClasspath
@@ -19,7 +19,7 @@ task wallet_tool(type: JavaExec) {
 
 task build_checkpoints(type: JavaExec) {
     description = 'Create checkpoint files to use with CheckpointManager.'
-    main = 'org.bitcoinj.tools.BuildCheckpoints'
+    main = 'org.bitcoingoldj.tools.BuildCheckpoints'
     if (project.hasProperty('appArgs') && appArgs.length() > 0)
         args = Arrays.asList(appArgs.split("\\s+"))
     classpath = sourceSets.main.runtimeClasspath

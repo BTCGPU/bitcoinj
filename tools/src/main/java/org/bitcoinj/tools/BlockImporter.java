@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.tools;
+package org.bitcoingoldj.tools;
 
-import org.bitcoinj.core.*;
-import org.bitcoinj.params.MainNetParams;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.store.*;
-import org.bitcoinj.utils.BlockFileLoader;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.params.MainNetParams;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.store.*;
+import org.bitcoingoldj.utils.BlockFileLoader;
 import com.google.common.base.Preconditions;
 
 import java.io.File;

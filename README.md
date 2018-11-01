@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/bitcoinj/bitcoinj.png?branch=master)](https://travis-ci.org/bitcoinj/bitcoinj)   [![Coverage Status](https://coveralls.io/repos/bitcoinj/bitcoinj/badge.png?branch=master)](https://coveralls.io/r/bitcoinj/bitcoinj?branch=master) 
+[![Build Status](https://travis-ci.org.bitcoingoldj/bitcoinj.png?branch=master)](https://travis-ci.org.bitcoingoldj/bitcoinj)   [![Coverage Status](https://coveralls.io/repos/bitcoinj/bitcoinj/badge.png?branch=master)](https://coveralls.io/r/bitcoinj/bitcoinj?branch=master)
 
 [![Visit our IRC channel](https://kiwiirc.com/buttons/irc.freenode.net/bitcoinj.png)](https://kiwiirc.com/client/irc.freenode.net/bitcoinj)
 
@@ -46,9 +46,9 @@ Now you are ready to [follow the tutorial](https://bitcoinj.github.io/getting-st
 
 ## Examples
 
-- [Create Bitcoin Gold Block from hex](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L19)
-- [Create a 1-to-1 Bitcoin Gold Transaction](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L553)
-- [Create a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L590)
-- [Sign a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/TransactionTest.java#L637)
-- [Validate block (including Equihash)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/BlockGoldTest.java#L144)
-- [Validate block (including LWMA)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org/bitcoinj/core/LwmaTest.java#L91)
+- [Create Bitcoin Gold Block from hex](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/BlockGoldTest.java#L19)
+- [Create a 1-to-1 Bitcoin Gold Transaction](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/TransactionTest.java#L553)
+- [Create a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/TransactionTest.java#L590)
+- [Sign a 2-of-2 Bitcoin Gold multisig](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/TransactionTest.java#L637)
+- [Validate block (including Equihash)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/BlockGoldTest.java#L144)
+- [Validate block (including LWMA)](https://github.com/BTCGPU/bitcoinj/blob/master/core/src/test/java/org.bitcoingoldj/core/LwmaTest.java#L91)

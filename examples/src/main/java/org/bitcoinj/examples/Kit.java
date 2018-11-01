@@ -14,22 +14,22 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.examples;
+package org.bitcoingoldj.examples;
 
-import org.bitcoinj.core.*;
-import org.bitcoinj.kits.WalletAppKit;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.script.Script;
-import org.bitcoinj.wallet.Wallet;
-import org.bitcoinj.wallet.listeners.KeyChainEventListener;
-import org.bitcoinj.wallet.listeners.ScriptsChangeEventListener;
-import org.bitcoinj.wallet.listeners.WalletCoinsReceivedEventListener;
-import org.bitcoinj.wallet.listeners.WalletCoinsSentEventListener;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.kits.WalletAppKit;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.script.Script;
+import org.bitcoingoldj.wallet.Wallet;
+import org.bitcoingoldj.wallet.listeners.KeyChainEventListener;
+import org.bitcoingoldj.wallet.listeners.ScriptsChangeEventListener;
+import org.bitcoingoldj.wallet.listeners.WalletCoinsReceivedEventListener;
+import org.bitcoingoldj.wallet.listeners.WalletCoinsSentEventListener;
 
 import java.io.File;
 import java.util.List;
 
-import org.bitcoinj.core.listeners.TransactionConfidenceEventListener;
+import org.bitcoingoldj.core.listeners.TransactionConfidenceEventListener;
 
 /**
  * The following example shows how to use the by bitcoinj provided WalletAppKit.
@@ -53,7 +53,7 @@ public class Kit {
         NetworkParameters params = TestNet3Params.get();
 
         // Now we initialize a new WalletAppKit. The kit handles all the boilerplate for us and is the easiest way to get everything up and running.
-        // Have a look at the WalletAppKit documentation and its source to understand what's happening behind the scenes: https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org/bitcoinj/kits/WalletAppKit.java
+        // Have a look at the WalletAppKit documentation and its source to understand what's happening behind the scenes: https://github.com/bitcoinj/bitcoinj/blob/master/core/src/main/java/org.bitcoingoldj/kits/WalletAppKit.java
         WalletAppKit kit = new WalletAppKit(params, new File("."), "walletappkit-example");
 
         // In case you want to connect with your local bitcoind tell the kit to connect to localhost.

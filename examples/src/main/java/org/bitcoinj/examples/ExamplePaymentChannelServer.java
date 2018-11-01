@@ -15,20 +15,20 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.examples;
+package org.bitcoingoldj.examples;
 
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.core.Sha256Hash;
-import org.bitcoinj.core.VerificationException;
-import org.bitcoinj.kits.WalletAppKit;
-import org.bitcoinj.params.RegTestParams;
-import org.bitcoinj.protocols.channels.*;
-import org.bitcoinj.utils.BriefLogFormatter;
-import org.bitcoinj.wallet.WalletExtension;
+import org.bitcoingoldj.core.Coin;
+import org.bitcoingoldj.core.NetworkParameters;
+import org.bitcoingoldj.core.Sha256Hash;
+import org.bitcoingoldj.core.VerificationException;
+import org.bitcoingoldj.kits.WalletAppKit;
+import org.bitcoingoldj.params.RegTestParams;
+import org.bitcoingoldj.protocols.channels.*;
+import org.bitcoingoldj.utils.BriefLogFormatter;
+import org.bitcoingoldj.wallet.WalletExtension;
 
 import com.google.common.collect.ImmutableList;
 

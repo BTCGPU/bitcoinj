@@ -14,16 +14,16 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.tools;
+package org.bitcoingoldj.tools;
 
-import org.bitcoinj.core.*;
-import org.bitcoinj.core.listeners.PeerConnectedEventListener;
-import org.bitcoinj.core.listeners.PeerDisconnectedEventListener;
-import org.bitcoinj.kits.WalletAppKit;
-import org.bitcoinj.params.MainNetParams;
-import org.bitcoinj.utils.BriefLogFormatter;
-import org.bitcoinj.wallet.SendRequest;
-import org.bitcoinj.wallet.Wallet;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.core.listeners.PeerConnectedEventListener;
+import org.bitcoingoldj.core.listeners.PeerDisconnectedEventListener;
+import org.bitcoingoldj.kits.WalletAppKit;
+import org.bitcoingoldj.params.MainNetParams;
+import org.bitcoingoldj.utils.BriefLogFormatter;
+import org.bitcoingoldj.wallet.SendRequest;
+import org.bitcoingoldj.wallet.Wallet;
 
 import java.io.File;
 import java.util.concurrent.ExecutionException;

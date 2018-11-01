@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.examples;
+package org.bitcoingoldj.examples;
 
-import org.bitcoinj.core.listeners.DownloadProgressTracker;
-import org.bitcoinj.core.*;
-import org.bitcoinj.net.discovery.DnsDiscovery;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.store.SPVBlockStore;
-import org.bitcoinj.wallet.DeterministicSeed;
-import org.bitcoinj.wallet.Wallet;
+import org.bitcoingoldj.core.listeners.DownloadProgressTracker;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.net.discovery.DnsDiscovery;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.store.SPVBlockStore;
+import org.bitcoingoldj.wallet.DeterministicSeed;
+import org.bitcoingoldj.wallet.Wallet;
 
 import java.io.File;
 

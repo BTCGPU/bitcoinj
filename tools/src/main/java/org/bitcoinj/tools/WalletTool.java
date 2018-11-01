@@ -15,25 +15,25 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.tools;
+package org.bitcoingoldj.tools;
 
-import org.bitcoinj.crypto.*;
-import org.bitcoinj.params.MainNetParams;
-import org.bitcoinj.params.RegTestParams;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.protocols.payments.PaymentProtocol;
-import org.bitcoinj.protocols.payments.PaymentProtocolException;
-import org.bitcoinj.protocols.payments.PaymentSession;
-import org.bitcoinj.script.ScriptBuilder;
-import org.bitcoinj.script.ScriptException;
-import org.bitcoinj.script.ScriptPattern;
-import org.bitcoinj.store.*;
-import org.bitcoinj.uri.BitcoinURI;
-import org.bitcoinj.uri.BitcoinURIParseException;
-import org.bitcoinj.utils.BriefLogFormatter;
-import org.bitcoinj.wallet.DeterministicSeed;
-import org.bitcoinj.wallet.DeterministicUpgradeRequiredException;
-import org.bitcoinj.wallet.DeterministicUpgradeRequiresPassword;
+import org.bitcoingoldj.crypto.*;
+import org.bitcoingoldj.params.MainNetParams;
+import org.bitcoingoldj.params.RegTestParams;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.protocols.payments.PaymentProtocol;
+import org.bitcoingoldj.protocols.payments.PaymentProtocolException;
+import org.bitcoingoldj.protocols.payments.PaymentSession;
+import org.bitcoingoldj.script.ScriptBuilder;
+import org.bitcoingoldj.script.ScriptException;
+import org.bitcoingoldj.script.ScriptPattern;
+import org.bitcoingoldj.store.*;
+import org.bitcoingoldj.uri.BitcoinURI;
+import org.bitcoingoldj.uri.BitcoinURIParseException;
+import org.bitcoingoldj.utils.BriefLogFormatter;
+import org.bitcoingoldj.wallet.DeterministicSeed;
+import org.bitcoingoldj.wallet.DeterministicUpgradeRequiredException;
+import org.bitcoingoldj.wallet.DeterministicUpgradeRequiresPassword;
 import com.google.common.base.Splitter;
 import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
@@ -45,45 +45,45 @@ import joptsimple.OptionSet;
 import joptsimple.OptionSpec;
 import joptsimple.util.DateConverter;
 
-import org.bitcoinj.core.AbstractBlockChain;
-import org.bitcoinj.core.Address;
-import org.bitcoinj.core.AddressFormatException;
-import org.bitcoinj.core.Base58;
-import org.bitcoinj.core.Block;
-import org.bitcoinj.core.BlockChain;
-import org.bitcoinj.core.CheckpointManager;
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.Context;
-import org.bitcoinj.core.DumpedPrivateKey;
-import org.bitcoinj.core.ECKey;
-import org.bitcoinj.core.FilteredBlock;
-import org.bitcoinj.core.FullPrunedBlockChain;
-import org.bitcoinj.core.InsufficientMoneyException;
-import org.bitcoinj.core.LegacyAddress;
-import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.core.Peer;
-import org.bitcoinj.core.PeerAddress;
-import org.bitcoinj.core.PeerGroup;
-import org.bitcoinj.core.Sha256Hash;
-import org.bitcoinj.core.StoredBlock;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.TransactionInput;
-import org.bitcoinj.core.TransactionOutput;
-import org.bitcoinj.core.Utils;
-import org.bitcoinj.core.VerificationException;
-import org.bitcoinj.core.listeners.BlocksDownloadedEventListener;
-import org.bitcoinj.core.listeners.DownloadProgressTracker;
-import org.bitcoinj.wallet.MarriedKeyChain;
-import org.bitcoinj.wallet.Protos;
-import org.bitcoinj.wallet.SendRequest;
-import org.bitcoinj.wallet.Wallet;
-import org.bitcoinj.wallet.WalletExtension;
-import org.bitcoinj.wallet.WalletProtobufSerializer;
-import org.bitcoinj.wallet.Wallet.BalanceType;
-import org.bitcoinj.wallet.listeners.WalletChangeEventListener;
-import org.bitcoinj.wallet.listeners.WalletCoinsReceivedEventListener;
-import org.bitcoinj.wallet.listeners.WalletCoinsSentEventListener;
-import org.bitcoinj.wallet.listeners.WalletReorganizeEventListener;
+import org.bitcoingoldj.core.AbstractBlockChain;
+import org.bitcoingoldj.core.Address;
+import org.bitcoingoldj.core.AddressFormatException;
+import org.bitcoingoldj.core.Base58;
+import org.bitcoingoldj.core.Block;
+import org.bitcoingoldj.core.BlockChain;
+import org.bitcoingoldj.core.CheckpointManager;
+import org.bitcoingoldj.core.Coin;
+import org.bitcoingoldj.core.Context;
+import org.bitcoingoldj.core.DumpedPrivateKey;
+import org.bitcoingoldj.core.ECKey;
+import org.bitcoingoldj.core.FilteredBlock;
+import org.bitcoingoldj.core.FullPrunedBlockChain;
+import org.bitcoingoldj.core.InsufficientMoneyException;
+import org.bitcoingoldj.core.LegacyAddress;
+import org.bitcoingoldj.core.NetworkParameters;
+import org.bitcoingoldj.core.Peer;
+import org.bitcoingoldj.core.PeerAddress;
+import org.bitcoingoldj.core.PeerGroup;
+import org.bitcoingoldj.core.Sha256Hash;
+import org.bitcoingoldj.core.StoredBlock;
+import org.bitcoingoldj.core.Transaction;
+import org.bitcoingoldj.core.TransactionInput;
+import org.bitcoingoldj.core.TransactionOutput;
+import org.bitcoingoldj.core.Utils;
+import org.bitcoingoldj.core.VerificationException;
+import org.bitcoingoldj.core.listeners.BlocksDownloadedEventListener;
+import org.bitcoingoldj.core.listeners.DownloadProgressTracker;
+import org.bitcoingoldj.wallet.MarriedKeyChain;
+import org.bitcoingoldj.wallet.Protos;
+import org.bitcoingoldj.wallet.SendRequest;
+import org.bitcoingoldj.wallet.Wallet;
+import org.bitcoingoldj.wallet.WalletExtension;
+import org.bitcoingoldj.wallet.WalletProtobufSerializer;
+import org.bitcoingoldj.wallet.Wallet.BalanceType;
+import org.bitcoingoldj.wallet.listeners.WalletChangeEventListener;
+import org.bitcoingoldj.wallet.listeners.WalletCoinsReceivedEventListener;
+import org.bitcoingoldj.wallet.listeners.WalletCoinsSentEventListener;
+import org.bitcoingoldj.wallet.listeners.WalletReorganizeEventListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.spongycastle.crypto.params.KeyParameter;
@@ -107,7 +107,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.LogManager;
 
-import static org.bitcoinj.core.Coin.parseCoin;
+import static org.bitcoingoldj.core.Coin.parseCoin;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -131,7 +131,7 @@ public class WalletTool {
     private static File chainFileName;
     private static ValidationMode mode;
     private static String password;
-    private static org.bitcoin.protocols.payments.Protos.PaymentRequest paymentRequest;
+    private static org.bitcoingold.protocols.payments.Protos.PaymentRequest paymentRequest;
     private static OptionSpec<Integer> lookaheadSize;
 
     public static class Condition {
@@ -1079,7 +1079,7 @@ public class WalletTool {
                 System.exit(1);
             }
             try {
-                paymentRequest = org.bitcoin.protocols.payments.Protos.PaymentRequest.newBuilder().mergeFrom(stream).build();
+                paymentRequest = org.bitcoingold.protocols.payments.Protos.PaymentRequest.newBuilder().mergeFrom(stream).build();
             } catch(IOException e) {
                 System.err.println("Failed to parse payment request from file " + e.getMessage());
                 System.exit(1);

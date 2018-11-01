@@ -1,4 +1,4 @@
-# configuration for https://travis-ci.org/bitcoinj/bitcoinj
+# configuration for https://travis-ci.org.bitcoingoldj/bitcoinj
 sudo: false
 dist: trusty
 language: java

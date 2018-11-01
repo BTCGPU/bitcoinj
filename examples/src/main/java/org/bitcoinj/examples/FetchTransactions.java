@@ -15,13 +15,13 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.examples;
+package org.bitcoingoldj.examples;
 
-import org.bitcoinj.core.*;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.store.BlockStore;
-import org.bitcoinj.store.MemoryBlockStore;
-import org.bitcoinj.utils.BriefLogFormatter;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.store.BlockStore;
+import org.bitcoingoldj.store.MemoryBlockStore;
+import org.bitcoingoldj.utils.BriefLogFormatter;
 import com.google.common.util.concurrent.ListenableFuture;
 
 import java.net.InetAddress;

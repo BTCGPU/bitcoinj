@@ -15,18 +15,18 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.tools;
+package org.bitcoingoldj.tools;
 
-import org.bitcoinj.core.listeners.NewBestBlockListener;
-import org.bitcoinj.core.*;
-import org.bitcoinj.net.discovery.DnsDiscovery;
-import org.bitcoinj.params.MainNetParams;
-import org.bitcoinj.params.RegTestParams;
-import org.bitcoinj.params.TestNet3Params;
-import org.bitcoinj.store.BlockStore;
-import org.bitcoinj.store.MemoryBlockStore;
-import org.bitcoinj.utils.BriefLogFormatter;
-import org.bitcoinj.utils.Threading;
+import org.bitcoingoldj.core.listeners.NewBestBlockListener;
+import org.bitcoingoldj.core.*;
+import org.bitcoingoldj.net.discovery.DnsDiscovery;
+import org.bitcoingoldj.params.MainNetParams;
+import org.bitcoingoldj.params.RegTestParams;
+import org.bitcoingoldj.params.TestNet3Params;
+import org.bitcoingoldj.store.BlockStore;
+import org.bitcoingoldj.store.MemoryBlockStore;
+import org.bitcoingoldj.utils.BriefLogFormatter;
+import org.bitcoingoldj.utils.Threading;
 import com.google.common.io.Resources;
 import joptsimple.OptionParser;
 import joptsimple.OptionSet;

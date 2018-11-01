@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.bitcoinj.examples;
+package org.bitcoingoldj.examples;
 
 import java.io.IOException;
 import java.math.BigInteger;
@@ -24,26 +24,26 @@ import java.util.EnumSet;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-import org.bitcoinj.core.LegacyAddress;
-import org.bitcoinj.core.Coin;
-import org.bitcoinj.core.ECKey;
-import org.bitcoinj.core.NetworkParameters;
-import org.bitcoinj.core.Transaction;
-import org.bitcoinj.core.TransactionInput;
-import org.bitcoinj.core.TransactionOutput;
-import org.bitcoinj.core.Utils;
-import org.bitcoinj.crypto.TransactionSignature;
-import org.bitcoinj.params.MainNetParams;
-import org.bitcoinj.script.Script;
-import org.bitcoinj.script.ScriptBuilder;
-import org.bitcoinj.script.ScriptChunk;
-import org.bitcoinj.script.ScriptException;
+import org.bitcoingoldj.core.LegacyAddress;
+import org.bitcoingoldj.core.Coin;
+import org.bitcoingoldj.core.ECKey;
+import org.bitcoingoldj.core.NetworkParameters;
+import org.bitcoingoldj.core.Transaction;
+import org.bitcoingoldj.core.TransactionInput;
+import org.bitcoingoldj.core.TransactionOutput;
+import org.bitcoingoldj.core.Utils;
+import org.bitcoingoldj.crypto.TransactionSignature;
+import org.bitcoingoldj.params.MainNetParams;
+import org.bitcoingoldj.script.Script;
+import org.bitcoingoldj.script.ScriptBuilder;
+import org.bitcoingoldj.script.ScriptChunk;
+import org.bitcoingoldj.script.ScriptException;
 
-import static org.bitcoinj.script.ScriptOpCodes.getOpCodeName;
-import org.bitcoinj.signers.LocalTransactionSigner;
-import org.bitcoinj.signers.TransactionSigner.ProposedTransaction;
-import org.bitcoinj.wallet.KeyBag;
-import org.bitcoinj.wallet.RedeemData;
+import static org.bitcoingoldj.script.ScriptOpCodes.getOpCodeName;
+import org.bitcoingoldj.signers.LocalTransactionSigner;
+import org.bitcoingoldj.signers.TransactionSigner.ProposedTransaction;
+import org.bitcoingoldj.wallet.KeyBag;
+import org.bitcoingoldj.wallet.RedeemData;
 
 /**
  * Test case generator for transactions with low-S and high-S signatures, to
