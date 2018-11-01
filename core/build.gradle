@@ -30,7 +30,7 @@ protobuf {
 }
 
 test {
-    exclude 'org.bitcoingoldj/net/NetworkAbstractionTests*'
+    exclude 'org/bitcoingoldj/net/NetworkAbstractionTests*'
 }
 
 task javadocJar(type: Jar, dependsOn: javadoc) {
